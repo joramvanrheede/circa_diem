@@ -1,5 +1,5 @@
 function [circadian_points, time_edges, plot_handle] = circadian_rose(time_points, in_data, time_res, stat, detrend)
-% function [CIRCADIAN_POINTS, TIME_EDGES, PLOT_HANDLE] = CIRCADIAN_ROSE(TIME_POINTS,IN_DATA, TIME_RES, STAT, DETREND)
+% FUNCTION [CIRCADIAN_POINTS, TIME_EDGES, PLOT_HANDLE] = CIRCADIAN_ROSE(TIME_POINTS,IN_DATA, TIME_RES, STAT, DETREND)
 % 
 % Creates a circadian (0-24h) rose plot of the means of IN_DATA across
 % the times of day contained in TIME_POINTS in the current axes, Petals 
@@ -9,9 +9,9 @@ function [circadian_points, time_edges, plot_handle] = circadian_rose(time_point
 % with a time of day within its time bin. STAT determines whether petal 
 % height will represent the mean or the median.
 % 
-% DETREND will control for trends across multiple days by dividing values
-% for each day by their median, resulting in normalised values for each
-% day.
+% If DETREND is set to 'true'/1, the function will normalise the data by
+% dividing the data points for each day by their median, removing
+% influences from longer-term trends in the data.
 % 
 % 
 % INPUTS:
@@ -20,8 +20,8 @@ function [circadian_points, time_edges, plot_handle] = circadian_rose(time_point
 % in IN_DATA.
 %
 % IN_DATA: A vector of data values, with a corresponding value for each
-% time point in TIME_POINTS. Use NaNs for missing data, they will be
-% ignored.
+% time point in TIME_POINTS. Use NaNs for missing data (they will be
+% ignored).
 %
 % TIME_RES: The time resolution in hours, i.e. the size of the time bins 
 % for creating the entries in the circadian matrix. Defaults to 1 (hour),
@@ -47,12 +47,18 @@ function [circadian_points, time_edges, plot_handle] = circadian_rose(time_point
 % Joram van Rheede, May 2021
 
 % Set defaults if needed
+
+% Default to no de-trending of data
 if nargin < 5
     detrend = false;
 end
+
+% Default to using 'mean' rather than 'median'
 if nargin < 4
     stat = 'mean';
 end
+
+% Default time resolution is 1 (hour)
 if nargin < 3
     time_res = 1;
 end
@@ -65,13 +71,15 @@ if detrend
     
     switch stat
         case 'mean'
-            circadian_matrix = circadian_matrix ./ nanmean(circadian_matrix,2);
-            circadian_points = nanmean(circadian_matrix);
+            circadian_matrix = circadian_matrix ./ mean(circadian_matrix,2,'omitnan');
+            circadian_points = mean(circadian_matrix,'omitnan');
         case 'median'
-            circadian_matrix = circadian_matrix ./ nanmedian(circadian_matrix,2);
-            circadian_points = nanmedian(circadian_matrix);
+            circadian_matrix = circadian_matrix ./ median(circadian_matrix,2,'omitnan');
+            circadian_points = median(circadian_matrix,'omitnan');
     end
 else
+    % If not, just calculate mean/median values for each time bin across
+    % days
     [circadian_points, time_edges]  = circadian_means(time_points, in_data, time_res, stat);
 end
 
