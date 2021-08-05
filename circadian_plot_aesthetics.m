@@ -1,4 +1,14 @@
 function circadian_plot_aesthetics
+% FUNCTION CIRCADIAN_PLOT_AESTHETICS
+% 
+% Various typographic and graphical settings for circadian plots. Includes
+% a number of tweaks to the standard polar axes, as well as a re-labeling
+% of the angles between 0 and 2pi to 0h and 24h. Theta zero location
+% (corresponding to 0h/24h) is set at the top of the axes, and the theta
+% direction is set to go clockwise for a more intuitive interpretation in
+% terms of the 24h clock.
+% 
+% Joram van Rheede 2021
 
 % Start from the top and go clockwise
 set(gca,'ThetaZeroLocation','top','ThetaDir','clockwise')
