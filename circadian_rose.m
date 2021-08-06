@@ -66,7 +66,7 @@ end
 % Get means for circadian time points
 [circadian_points, time_edges]  = circadian_means(time_points, in_data, time_res, stat, detrend);
 
-% Make sure the vector is always in the same orientation
+% Make sure the vector is in the correct orientation
 circadian_points        = circadian_points(:); 
 
 % Convert 24h range to radians for polar representation
