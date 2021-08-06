@@ -1,6 +1,6 @@
 function [time_bin_means, time_edges] = circadian_means(time_points, in_data, time_res, stat, detrend)
 % function [bin_means, bin_edges] = circadian_means(time_points, in_data, time_res, stat)
-% 
+%
 % Get mean values in time bins around the 24h circadian cycle.
 %
 % INPUTS:
@@ -12,16 +12,16 @@ function [time_bin_means, time_edges] = circadian_means(time_points, in_data, ti
 % time point in TIME_POINTS. Use NaNs for missing data, they will be
 % ignored.
 %
-% TIME_RES: The time resolution in hours, i.e. the size of the time bins 
+% TIME_RES: The time resolution in hours, i.e. the size of the time bins
 % for creating the entries in the circadian matrix. Defaults to 1 (hour),
 % dividing the day into 24 1-hour bins.
 %
-% STAT: Which statistic to use to generate each value. Default is  'mean', 
+% STAT: Which statistic to use to generate each value. Default is  'mean',
 % but for a more robust estimate 'median' can be used.
-% 
-% DETREND: Remove long-term trends in the data by normalising values to
-% each day
-% 
+%
+% DETREND: Boolean - Remove long-term trends in the data by normalising
+% values to each day? Defaults to 'false'.
+%
 % Joram van Rheede 2021
 
 % Default to raw mean values without detrending by normalising each day
@@ -42,29 +42,19 @@ end
 % get info about time of day
 time_of_day         = timeofday(time_points);
 
-% Create 'duration' variables for the time edges 
+% Create 'duration' variables for the time edges
 time_edges          = hours(0:time_res:24);
 
 % Does data need to be normalised within each day to remove longer term
 % trends?
 if detrend
-    % If so, make a circadian matrix with time binned data for each day, 
-    [circadian_matrix, time_edges]  = make_circadian_matrix(time_points, in_data, time_res, stat);
-
-    % Depending on which stat (mean/median) is requested...
-    switch stat
-        case 'mean'
-            % Divide each row in the circadian matrix by its mean...
-            normalised_circadian_matrix     = circadian_matrix ./ mean(circadian_matrix,2,'omitnan');
-            % And then take the mean over all days for each time point
-            time_bin_means                  = mean(normalised_circadian_matrix,'omitnan');
-            
-        case 'median'
-            % Divide each row in the circadian matrix by its median...
-            normalised_circadian_matrix     = circadian_matrix ./ median(circadian_matrix,2,'omitnan');
-            % And then take the median over all days for each time point
-            time_bin_means                  = median(normalised_circadian_matrix,'omitnan');
-    end
+    % If so, make a circadian matrix with time binned data for each day,
+    % and divide by mean/median (depending on STAT) for that day using the
+    % 'detrend' option in make_circadian_matrix:
+    [normalised_circadian_matrix, time_edges]  = make_circadian_matrix(time_points, in_data, time_res, stat, detrend);
+    
+    % And take the median over all days for each time point
+    time_bin_means                  = median(normalised_circadian_matrix,'omitnan');
     
 else
     
