@@ -21,16 +21,21 @@ function [vector_length, vector_dir] = circadian_vect(in_times, in_values)
 % 
 % INPUTS:
 % 
-% CIRC_DATA_POINTS: an MxN matrix...
+% IN_TIMES: A vector of datetimes or durations specifying the times at
+% which events or measurements occurred.
 % 
-% ANGLES:
+% IN_VALUES (optional): A vector of values equal in size to IN_TIMES, 
+% corresponding to the value / weight associated with each time point. If
+% no IN_VALUES are specified, each time point has a default weight of 1.
 % 
 % 
 % OUTPUTS:
 % 
-% VECTOR_LENGTH:
+% VECTOR_LENGTH: The length of the resultant vector, a scalar between 0 and
+% 1.
 % 
-% VECTOR_DIR:
+% VECTOR_DIR: A scalar specifying the direction (angle) of the resultant
+% vector (in radians).
 % 
 % 
 % Joram van Rheede, 2021
