@@ -1,5 +1,5 @@
-function [circadian_matrix, time_edges] = make_circadian_matrix(time_points, in_data, time_res, stat)
-% function [CIRCADIAN_MATRIX, TIME_EDGES] = MAKE_CIRCADIAN_MATRIX(TIME_POINTS, IN_DATA, TIME_RES, STAT)
+function [circadian_matrix, time_edges] = make_circadian_matrix(time_points, in_data, time_res, stat, detrend)
+% function [CIRCADIAN_MATRIX, TIME_EDGES] = MAKE_CIRCADIAN_MATRIX(TIME_POINTS, IN_DATA, TIME_RES, STAT, DETREND)
 %  
 % Represent IN_DATA collected at a series of TIME_POINTS (datetimes) as a 
 % matrix with each row representing a day, and each column representing a 
@@ -33,14 +33,23 @@ function [circadian_matrix, time_edges] = make_circadian_matrix(time_points, in_
 % TIME_EDGES: A duration vector of edges of the time bins around the 24h 
 % clock, with the duration between successive edges equal to TIME_RES.
 % 
+% DETREND: Boolean - Remove long-term trends in the data by normalising 
+% values to each day? Defaults to 'false'.
+% 
+% 
 % Joram van Rheede, May 2021
 
 
-if nargin < 3
+if nargin < 3 || isempty(time_res)
     time_res = 1;
 end
-if nargin < 4
+
+if nargin < 4 || isempty(stat)
     stat = 'mean';
+end
+
+if nargin < 5
+    detrend = false;
 end
 
 if ~isvector(time_points)
@@ -70,6 +79,7 @@ n_bins                  = length(time_edges)-1;
 % pre-allocate output variable
 circadian_matrix        = NaN(n_days,n_bins);
 
+% Loop over the number of days
 for a = 1:n_days
     
     % Make boolean to select data from this day
@@ -77,6 +87,7 @@ for a = 1:n_days
     this_end    = start_time + caldays(a);
     q_day       = isbetween(time_points, this_start, this_end);
     
+    % Loop over the number of time bins
     for t_ind = 1:n_bins
         
         % Make boolean to select data from target time bin & combine with
@@ -87,15 +98,24 @@ for a = 1:n_days
         % Get median of data in this time bin and add to matrix
         switch stat
             case 'mean'
-                bin_mean  	= nanmean(in_data(q_time_bin));
+                circadian_matrix(a,t_ind)  	= mean(in_data(q_time_bin),'omitnan');
             case 'median'
-                bin_mean  	= nanmedian(in_data(q_time_bin));
+                circadian_matrix(a,t_ind)  	= median(in_data(q_time_bin),'omitnan');
         end
-        
-        circadian_matrix(a,t_ind)   = bin_mean;
-        
     end
-    
 end
 
-
+% If detrending is requested...
+if detrend
+    % Depending on the measure of choice...
+    switch stat
+        case 'mean'
+            % Divide each row (i.e. day) in the circadian matrix by its
+            % mean
+            circadian_matrix     = circadian_matrix ./ mean(circadian_matrix,2,'omitnan');
+            
+        case 'median'
+            % Divide each row (i.e. day) in the circadian matrix by its
+            % median
+            circadian_matrix     = circadian_matrix ./ median(circadian_matrix,2,'omitnan');
+end
