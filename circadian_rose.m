@@ -63,25 +63,8 @@ if nargin < 3
     time_res = 1;
 end
 
-% Is de-trend requested?
-if detrend
-    
-    % If so, make a circadian matrix with time binned data for each day, 
-    [circadian_matrix, time_edges]  = make_circadian_matrix(time_points, in_data, time_res, stat);
-    
-    switch stat
-        case 'mean'
-            circadian_matrix = circadian_matrix ./ mean(circadian_matrix,2,'omitnan');
-            circadian_points = mean(circadian_matrix,'omitnan');
-        case 'median'
-            circadian_matrix = circadian_matrix ./ median(circadian_matrix,2,'omitnan');
-            circadian_points = median(circadian_matrix,'omitnan');
-    end
-else
-    % If not, just calculate mean/median values for each time bin across
-    % days
-    [circadian_points, time_edges]  = circadian_means(time_points, in_data, time_res, stat);
-end
+% Get means for circadian time points
+[circadian_points, time_edges]  = circadian_means(time_points, in_data, time_res, stat, detrend);
 
 % Make sure the vector is always in the same orientation
 circadian_points        = circadian_points(:); 
