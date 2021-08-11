@@ -118,4 +118,5 @@ if detrend
             % Divide each row (i.e. day) in the circadian matrix by its
             % median
             circadian_matrix     = circadian_matrix ./ median(circadian_matrix,2,'omitnan');
+    end
 end
