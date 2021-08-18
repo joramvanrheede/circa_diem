@@ -10,7 +10,7 @@ function [circadian_points, time_edges, plot_handle] = circadian_rose(time_point
 % height will represent the mean or the median.
 % 
 % If DETREND is set to 'true'/1, the function will normalise the data by
-% dividing the data points for each day by their median, removing
+% dividing the data points for each day by their mean / median, removing
 % influences from longer-term trends in the data.
 % 
 % 
