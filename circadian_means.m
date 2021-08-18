@@ -1,7 +1,12 @@
 function [time_bin_means, time_edges] = circadian_means(time_points, in_data, time_res, stat, detrend)
-% function [bin_means, bin_edges] = circadian_means(time_points, in_data, time_res, stat)
+% function [time_bin_means, bin_edges] = circadian_means(time_points, in_data, time_res, stat, detrend)
 %
-% Get mean values in time bins around the 24h circadian cycle.
+% Get mean or median values for IN_DATA in time bins around the 24h 
+% circadian cycle. TIME_POINTS specify the time points associated with the
+% values in IN_DATA. TIME_RES controls the size of the time bins. STAT
+% determines whether 'mean' or 'median' is reported. DETREND determines
+% whether values for each day are normalised to specifically highlight 
+% circadian variations. 
 %
 % INPUTS:
 %
@@ -22,6 +27,16 @@ function [time_bin_means, time_edges] = circadian_means(time_points, in_data, ti
 % DETREND: Boolean - Remove long-term trends in the data by normalising
 % values to each day? Defaults to 'false'.
 %
+% 
+% OUTPUTS:
+% 
+% TIME_BIN_MEANS: Mean or median values for IN_DATA within the time bins
+% as specified by TIME_BIN_EDGES
+% 
+% TIME_BIN_EDGES: The edges of the time bins used to generate the means, 
+% determined by TIME_RES
+%
+% 
 % Joram van Rheede 2021
 
 % Default to raw mean values without detrending by normalising each day
