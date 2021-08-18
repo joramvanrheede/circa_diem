@@ -1,20 +1,42 @@
-function [vector_lengths, vector_dirs] = get_shuffled_vectors(circ_data_points, n_shuffles, shuffle_mode)
-% function [vector_lengths, vector_dirs] = get_shuffled_vectors(circ_data_points, n_shuffles)
+function [shuffled_vector_lengths, shuffled_vector_dirs, p_val] = get_shuffled_vectors(time_points, in_data, n_shuffles, shuffle_mode, detrend, stat)
+% function [vector_lengths, vector_dirs] = get_shuffled_vectors(time_points, in_data, n_shuffles, shuffle_mode, detrend, stat)
+%
 
-% Default to complete
-if nargin < 3
+% Default to complete shuffle rather than circshift
+if nargin < 4
     shuffle_mode = 'complete';
 end
 
-vector_lengths  = NaN(n_shuffles, 1);
-vector_dirs     = NaN(n_shuffles, 1);
+% Don't normalise within day by default
+if nargin < 5
+    detrend = false;
+end
+
+% Default to using 'mean' for normalising values within each day
+if nargin < 6
+    stat = 'mean';
+end
+
+% pre-allocate the vector lengths and vector dirs for each shuffle
+shuffled_vector_lengths  = NaN(n_shuffles, 1);
+shuffled_vector_dirs     = NaN(n_shuffles, 1);
 for a = 1:n_shuffles
-    switch shuffle_mode
-        case 'complete'
-            shuffled_data_points = shuffle_mat(circ_data_points,'rows');
-        case 'circshift'
-            shuffled_data_points = rand_circ_shift(circ_data_points,2);
+    
+    if mod(a,100) == 0
+        disp([num2str(a) ' shuffles complete...'])
     end
-    [vector_lengths(a), vector_dirs(a)] = circadian_vect_length(shuffled_data_points);
+    
+    % Get shuffled data points
+    shuffled_data_points    = within_day_shuffle(time_points, in_data, shuffle_mode, detrend, stat);
+    
+    % Calculate resultant vector
+    [shuffled_vector_lengths(a), shuffled_vector_dirs(a)] = circadian_vect(time_points,shuffled_data_points);
     
 end
+
+% Get vector length for original data
+vector_length   = circadian_vect(time_points, in_data);
+
+% Get p-value of original vector compared to the distribution of shuffled 
+% vectors:
+p_val = sum(shuffled_vector_lengths > vector_length) / n_shuffles;
