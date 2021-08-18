@@ -1,11 +1,11 @@
 function shuffled_data = within_day_shuffle(time_points, in_data, shuffle_mode, detrend, stat)
-% function within_day_shuffle(time_stamps, values, shuffle_mode, detrend, stat)
+% function shuffled_data = within_day_shuffle(time_points, in_data, shuffle_mode, detrend, stat)
 % 
 
 
 % Default is to use a total reshuffle rather than circshift
 if nargin < 3
-    shuffle_mode = 'shuffle';
+    shuffle_mode = 'complete';
 end
 
 % Default is not to normalise values for each day
@@ -59,7 +59,7 @@ for a = 1:n_days
     
     % Depending on shuffle mode:
     switch shuffle_mode
-        case 'shuffle'
+        case 'complete'
             % Get a random order of indices
             shuffle_inds            = randperm(n_points);
             
