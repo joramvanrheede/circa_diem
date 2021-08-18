@@ -21,7 +21,7 @@ function color_map = colormap_from_color(color,n_steps,base)
 % COLORMAP: an N_STEPS x 3 matrix of RGB values representing a colormap
 % that transitions in N_STEPS linear steps from BASE to COLOR.
 % 
-% Joram van Rheede May 2021
+% Joram van Rheede, 2021
 
 % Default to a colormap with 128 levels
 if nargin < 2
