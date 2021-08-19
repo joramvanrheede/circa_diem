@@ -52,7 +52,9 @@ This toolbox makes use of a number of the circular statistics functions in [circ
 This toolbox was developed by:
 
 Dr. Joram J. van Rheede
+
 MRC Brain Network Dynamics Unit
+
 University of Oxford, UK
 
 *e-mail*: joram.vanrheede@bndu.ox.ac.uk
