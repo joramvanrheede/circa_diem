@@ -24,6 +24,10 @@ function [circadian_matrix, time_edges] = plot_circadian_matrix(time_points, in_
 % STAT: Which statistic to use to generate each binned value. Default is 
 % 'mean', but for a more robust estimate 'median' can be used.
 % 
+% DETREND: Boolean - Remove long-term trends in the data by normalising 
+% values to each day? Defaults to 'false'.
+% 
+% 
 % OUTPUTS:
 % 
 % CIRCADIAN_MATRIX: An MxN matrix, where M is the number of days in
@@ -33,8 +37,6 @@ function [circadian_matrix, time_edges] = plot_circadian_matrix(time_points, in_
 % TIME_EDGES: A duration vector of edges of the time bins around the 24h 
 % clock, with the duration between successive edges equal to TIME_RES.
 % 
-% DETREND: Boolean - Remove long-term trends in the data by normalising 
-% values to each day? Defaults to 'false'.
 % 
 % 
 % Joram van Rheede, 2021
@@ -52,7 +54,7 @@ if nargin < 5
 end
 
 % Make circadian matrix
-circadian_matrix = make_circadian_matrix(time_points, in_data, time_res, stat, detrend);
+[circadian_matrix, time_edges] = make_circadian_matrix(time_points, in_data, time_res, stat, detrend);
 
 % Plot circadian matrix as scaled image
 imagesc(circadian_matrix)
