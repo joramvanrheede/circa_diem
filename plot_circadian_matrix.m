@@ -1,6 +1,43 @@
 function [circadian_matrix, time_edges] = plot_circadian_matrix(time_points, in_data, time_res, stat, detrend)
 % function [circadian_matrix, time_edges] = plot_circadian_matrix(time_points, in_data, time_res, stat, detrend)
-
+% 
+% Plot IN_DATA collected at a series of TIME_POINTS (datetimes) as a 
+% matrix with each row representing a day, and each column representing a 
+% time bin (width of time_bin controlled by TIME_RES, in hours).
+% 
+% Each point in the matrix will be the average (mean or median, controlled
+% by STAT) of all in_data points that were collected within that time bin.
+% 
+% INPUTS:
+%
+% TIME_POINTS: Datetime vector of time points corresponding to data points
+% in IN_DATA.
+%
+% IN_DATA: A vector of data values, with a corresponding value for each
+% time point in TIME_POINTS. Use NaNs for missing data, they will be
+% ignored.
+%
+% TIME_RES: The time resolution in hours, i.e. the size of the time bins 
+% for creating the entries in the circadian matrix. Defaults to 1 (hour),
+% dividing the day into 24 1-hour bins.
+%
+% STAT: Which statistic to use to generate each binned value. Default is 
+% 'mean', but for a more robust estimate 'median' can be used.
+% 
+% OUTPUTS:
+% 
+% CIRCADIAN_MATRIX: An MxN matrix, where M is the number of days in
+% time_points, and N is the number of time bins (as determined by
+% TIME_RES).
+% 
+% TIME_EDGES: A duration vector of edges of the time bins around the 24h 
+% clock, with the duration between successive edges equal to TIME_RES.
+% 
+% DETREND: Boolean - Remove long-term trends in the data by normalising 
+% values to each day? Defaults to 'false'.
+% 
+% 
+% Joram van Rheede, 2021
 
 if nargin < 3 || isempty(time_res)
     time_res = 1;
