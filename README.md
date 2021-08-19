@@ -21,9 +21,13 @@ Circa Diem also allows for some statistical tests of the extent of non-uniformit
 
 ### Statistics
 
+`circadian_means`: Get mean or median values of circadian data in time bins around the 24h circadian cycle.
+
 `circadian_rayleigh_test`: Performs a Rayleigh test on circadian data (uses [circstat](https://github.com/circstat/circstat-matlab)'s circ_rtest)
 
-`get_shuffled_vectors`:
+`circadian_vect`: Calculate the resultant vector length and direction of circadian data.
+
+`get_shuffled_vectors`: Generate a distribution of circadian resultant vectors for shuffled data, and compare the actual resultant vector length with the distribution from the shuffled data to obtain a p-value that represents the probability of observing a circadian vector of this length in the shuffled distribution.
 
 ### Utilities
 
@@ -31,7 +35,15 @@ Circa Diem also allows for some statistical tests of the extent of non-uniformit
 
 `fixplot`: Function with a number of quick plot aesthetics fixes for plots in cartesian co-ordinates and/or image (e.g. heatmap) axes.
 
+### Examples & Tutorial
+
+**Work in progress...**
+
+
 ## Dependencies
 This toolbox makes use of a number of the circular statistics functions in 'Circstat':
 https://github.com/circstat/circstat-matlab
 
+## Author
+This toolbox was developed by Dr. Joram J. van Rheede at the MRC Brain Network Dynamics Unit at the University of Oxford.
+*e-mail*: joram.vanrheede@bndu.ox.ac.uk
