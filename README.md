@@ -1,13 +1,14 @@
 # Circa Diem toolbox
 Matlab toolbox for plotting and analysis of circadian patterns in data.
  
-The Circa Diem toolbox is designed to generate circadian visualisations and analyses of data points with associated MATLAB 'datetime' values.
+The Circa Diem toolbox is designed to generate circadian visualisations and analyses of data points with associated MATLAB 'datetime' values. The basic input data format for the toolbox is:
+
+1) a series of time points as a vector of MATLAB 'datetimes' that correspond to events or measurement times, and 
+2) a series of values or weights corresponding to these measurement times or events
 
 Circa Diem also allows for some statistical tests of the extent of non-uniformity of circadian patterns. For this, the toolbox is heavily indebted to the [circstat_matlab](https://github.com/circstat/circstat-matlab) toolbox by Philipp Berens (some of the statistical functions are essentially wrapper functions around circstat functions).
 
 ## Contents
-
-
 
 ### Plotting
 
@@ -27,11 +28,15 @@ Circa Diem also allows for some statistical tests of the extent of non-uniformit
 
 `circadian_vect`: Calculate the resultant vector length and direction of circadian data.
 
+`detrend_circadian_data`: Remove longer-term trends in circadian data by 
+
 `get_shuffled_vectors`: Generate a distribution of circadian resultant vectors for shuffled data, and compare the actual resultant vector length with the distribution from the shuffled data to obtain a p-value that represents the probability of observing a circadian vector of this length in the shuffled distribution.
 
 ### Utilities
 
 `circadian_plot_aesthetics`: Function to quickly turn MATLAB polar axes into an aesthetically pleasing representation of the 24h circadian cycle.
+
+`subplot_equal_r`: Sets the radius ('r') of multiple polar axes in subplots to the same value.
 
 `fixplot`: Function with a number of quick plot aesthetics fixes for plots in cartesian co-ordinates and/or image (e.g. heatmap) axes.
 
@@ -41,9 +46,13 @@ Circa Diem also allows for some statistical tests of the extent of non-uniformit
 
 
 ## Dependencies
-This toolbox makes use of a number of the circular statistics functions in 'Circstat':
-https://github.com/circstat/circstat-matlab
+This toolbox makes use of a number of the circular statistics functions in [circstat_matlab](https://github.com/circstat/circstat-matlab)
 
 ## Author
-This toolbox was developed by Dr. Joram J. van Rheede at the MRC Brain Network Dynamics Unit at the University of Oxford.
+This toolbox was developed by:
+
+Dr. Joram J. van Rheede
+MRC Brain Network Dynamics Unit
+University of Oxford, UK
+
 *e-mail*: joram.vanrheede@bndu.ox.ac.uk
