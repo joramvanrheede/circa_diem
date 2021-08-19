@@ -9,13 +9,13 @@ Circa Diem also allows for some statistical tests of the extent of non-uniformit
 
 ## Plotting
 
-'<circadian_rose>': Rose plot of circadian data
+`circadian_rose`: Rose plot of circadian data
 
-plot_circadian_matrix: Plot circadian data as a heatmap with a row for each day
+`plot_circadian_matrix`: Plot circadian data as a heatmap with a row for each day
 
-plot_circadian_vector: Plot the resultant vector of circadian data
+`plot_circadian_vector`: Plot the resultant vector of circadian data
 
-plot_shuffled_vectors: Scatter plot of the resultant vectors 
+`plot_shuffled_vectors`: Scatter plot of the resultant vectors 
 
 
 # Dependencies
