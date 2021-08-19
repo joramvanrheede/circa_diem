@@ -17,6 +17,12 @@ function detrended_values = detrend_circadian_data(time_points, values, stat)
 % STAT: Which statistic to use to generate each binned value. Default is 
 % 'mean', but for a more robust estimate 'median' can be used.
 % 
+% OUTPUT:
+% 
+% DETRENDED_VALUES: A vector of size(VALUES) in which data within each day
+% have been normalised by dividing by that day's mean or median (as
+% determined by STAT).
+% 
 % 
 % Joram van Rheede, 2021
 
