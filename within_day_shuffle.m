@@ -19,6 +19,10 @@ end_time    = dateshift(max(time_points),'end','day');
 n_days    	= between(start_time, end_time, 'days'); 
 n_days      = caldays(n_days);
 
+% Time points and values need to be sorted for circshift to work
+[time_points, sort_inds] = sort(time_points);
+in_data     = in_data(sort_inds);
+
 % Pre-allocate shuffled data variable 
 shuffled_data   = NaN(size(in_data));
 
