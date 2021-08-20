@@ -1,5 +1,5 @@
-function [shuffled_vector_lengths, shuffled_vector_dirs, p_val] = get_shuffled_vectors(time_points, in_data, n_shuffles, shuffle_mode, detrend, stat)
-% function [SHUFFLED_VECTOR_LENGTHS, SHUFFLED_VECTOR_DIRS, P_VAL] = get_shuffled_vectors(TIME_POINTS, IN_DATA, N_SHUFFLES, SHUFFLE_MODE, DETREND, STAT)
+function [shuffled_vector_lengths, shuffled_vector_dirs, p_val] = get_shuffled_vectors(time_points, in_data, n_shuffles, shuffle_mode)
+% function [SHUFFLED_VECTOR_LENGTHS, SHUFFLED_VECTOR_DIRS, P_VAL] = get_shuffled_vectors(TIME_POINTS, IN_DATA, N_SHUFFLES, SHUFFLE_MODE)
 % 
 % Get the circadian resultant vectors for shuffled data, and compare the
 % actual resultant vector length with the distribution from the shuffled
