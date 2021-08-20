@@ -63,6 +63,7 @@ shuffled_vector_lengths  = NaN(n_shuffles, 1);
 shuffled_vector_dirs     = NaN(n_shuffles, 1);
 for a = 1:n_shuffles
     
+    % Display update every 100 shuffles
     if mod(a,100) == 0
         disp([num2str(a) ' shuffles complete...'])
     end
