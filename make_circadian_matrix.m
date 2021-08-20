@@ -36,21 +36,18 @@ function [circadian_matrix, time_edges] = make_circadian_matrix(time_points, in_
 % 
 % Joram van Rheede, 2021
 
-
+if nargin < 3 || isempty(in_data)
+    histogram_mode = true;
+end
+    
+% Default to 1-hour time bins
 if nargin < 3 || isempty(time_res)
     time_res = 1;
 end
 
+% Default to using mean
 if nargin < 4 || isempty(stat)
     stat = 'mean';
-end
-
-if ~isvector(time_points)
-    error('Input variable time_points should be a vector')
-end
-
-if ~isvector(in_data)
-    error('Input variable in_data should be a vector')
 end
 
 % Set start time from 00:00 at start of first day to 24:00 at end of final
@@ -80,21 +77,25 @@ for a = 1:n_days
     this_end    = start_time + caldays(a);
     q_day       = isbetween(time_points, this_start, this_end);
     
-    % Loop over the number of time bins
-    for t_ind = 1:n_bins
-        
-        % Make boolean to select data from target time bin & combine with
-        % day boolean
-        q_timeofday = isbetween(time_points_timeofday,time_edges(t_ind), time_edges(t_ind+1));
-        q_time_bin  = q_day & q_timeofday;
-        
-        % Get median of data in this time bin and add to matrix
-        switch stat
-            case 'mean'
-                circadian_matrix(a,t_ind)  	= mean(in_data(q_time_bin),'omitnan');
-            case 'median'
-                circadian_matrix(a,t_ind)  	= median(in_data(q_time_bin),'omitnan');
+    if ~histogram_mode
+        % Loop over the number of time bins
+        for t_ind = 1:n_bins
+            
+            % Make boolean to select data from target time bin & combine with
+            % day boolean
+            q_timeofday = isbetween(time_points_timeofday,time_edges(t_ind), time_edges(t_ind+1));
+            q_time_bin  = q_day & q_timeofday;
+            
+            % Get median of data in this time bin and add to matrix
+            switch stat
+                case 'mean'
+                    circadian_matrix(a,t_ind)  	= mean(in_data(q_time_bin),'omitnan');
+                case 'median'
+                    circadian_matrix(a,t_ind)  	= median(in_data(q_time_bin),'omitnan');
+            end
         end
+    else
+        circadian_matrix(a,:)   = circadian_hist_counts(time_points_timeofday(q_day), time_res);
     end
 end
 

@@ -48,16 +48,12 @@ if nargin < 2
     in_values       = ones(size(time_angles));
 end
 
-% Vectorise circ_data_points and angles
-in_values           = in_values(:);
-time_angles      	= time_angles(:);
-
 % Remove any NaN values
 is_nan              = isnan(in_values);
 
+% Set weight to 0
 if any(is_nan)
-    in_values       = in_values(~is_nan);
-    time_angles   	= time_angles(~is_nan);
+    in_values(is_nan) = 0;
 end
 
 % Calculate length and direction of resultant vector using functions from

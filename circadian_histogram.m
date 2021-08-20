@@ -5,6 +5,10 @@ function [hist_handle] = circadian_histogram(event_times, time_res)
 % 
 % Joram van Rheede, 2021
 
+if nargin < 2
+    time_res = 1;
+end
+
 % Get histogram counts
 [counts, time_edges] = circadian_hist_counts(event_times, time_res);
 
