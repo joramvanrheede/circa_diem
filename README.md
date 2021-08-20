@@ -21,11 +21,16 @@ Circa Diem also allows for some statistical tests of the extent of non-uniformit
 
 `circadian_rose`: Rose plot of circadian data
 
+`circadian_histogram`: Circular histogram of circadian data
+
+`circadian_raster_plot`: Raster plot of events across multiple days, with a row for each day, and a line for each event
+
 `plot_circadian_matrix`: Plot circadian data as a heatmap with a row for each day
 
 `plot_circadian_vector`: Plot the resultant vector of circadian data
 
 `plot_shuffled_vectors`: Scatter plot of the resultant vectors 
+
 
 ### Statistics
 
@@ -39,6 +44,7 @@ Circa Diem also allows for some statistical tests of the extent of non-uniformit
 
 `get_shuffled_vectors`: Generate a distribution of circadian resultant vectors for shuffled data, and compare the actual resultant vector length with the distribution from the shuffled data to obtain a p-value that represents the probability of observing a circadian vector of this length in the shuffled distribution.
 
+
 ### Utilities
 
 `circadian_plot_aesthetics`: Function to quickly turn MATLAB polar axes into an aesthetically pleasing representation of the 24h circadian cycle.
@@ -47,13 +53,20 @@ Circa Diem also allows for some statistical tests of the extent of non-uniformit
 
 `fixplot`: Function with a number of quick plot aesthetics fixes for plots in cartesian co-ordinates and/or image (e.g. heatmap) axes.
 
+
 ### Examples & Tutorial
 
 **Work in progress...**
 
+`circadian_summary_figure`: provides an example of how to use many of the regularly sampled data visualisations in the toolbox.
+
+`circadian_event_figure`: provides an example of how to use the event-based visualisations in the toolbox.
+
 
 ## Dependencies
+
 This toolbox makes use of a number of the circular statistics functions in [circstat_matlab](https://github.com/circstat/circstat-matlab)
+
 
 ## Author
 This toolbox was developed by:
