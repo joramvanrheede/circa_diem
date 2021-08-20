@@ -1,5 +1,5 @@
-function [circadian_points, time_edges, plot_handle] = circadian_rose(time_points, in_data, time_res, stat, detrend)
-% FUNCTION [CIRCADIAN_POINTS, TIME_EDGES, PLOT_HANDLE] = CIRCADIAN_ROSE(TIME_POINTS,IN_DATA, TIME_RES, STAT, DETREND)
+function [circadian_points, time_edges, plot_handle] = circadian_rose(time_points, in_data, time_res, stat)
+% FUNCTION [CIRCADIAN_POINTS, TIME_EDGES, PLOT_HANDLE] = CIRCADIAN_ROSE(TIME_POINTS,IN_DATA, TIME_RES, STAT)
 % 
 % Creates a circadian (0-24h) rose plot of the means of IN_DATA across
 % the times of day contained in TIME_POINTS in the current axes, Petals 
@@ -8,10 +8,6 @@ function [circadian_points, time_edges, plot_handle] = circadian_rose(time_point
 % Each rose petal will have a height determined by the values of IN_DATA 
 % with a time of day within its time bin. STAT determines whether petal 
 % height will represent the mean or the median.
-% 
-% If DETREND is set to 'true'/1, the function will normalise the data by
-% dividing the data points for each day by their mean / median, removing
-% influences from longer-term trends in the data.
 % 
 % 
 % INPUTS:
@@ -30,9 +26,6 @@ function [circadian_points, time_edges, plot_handle] = circadian_rose(time_point
 % STAT: Which statistic to use to generate each binned value. Default is 
 % 'mean', but for a more robust estimate 'median' can be used.
 % 
-% DETREND: true or false. If true, will remove variability between days by
-% dividing each day by its mean or median value (mean or median determined
-% by STAT).
 % 
 % OUTPUTS:
 % 
@@ -48,11 +41,6 @@ function [circadian_points, time_edges, plot_handle] = circadian_rose(time_point
 
 % Set defaults if needed
 
-% Default to no de-trending of data
-if nargin < 5
-    detrend = false;
-end
-
 % Default to using 'mean' rather than 'median'
 if nargin < 4
     stat = 'mean';
@@ -64,7 +52,7 @@ if nargin < 3
 end
 
 % Get means for circadian time points
-[circadian_points, time_edges]  = circadian_means(time_points, in_data, time_res, stat, detrend);
+[circadian_points, time_edges]  = circadian_means(time_points, in_data, time_res, stat);
 
 % Make sure the vector is in the correct orientation
 circadian_points        = circadian_points(:); 

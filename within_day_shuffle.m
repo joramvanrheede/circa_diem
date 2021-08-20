@@ -1,21 +1,11 @@
-function shuffled_data = within_day_shuffle(time_points, in_data, shuffle_mode, detrend, stat)
-% function shuffled_data = within_day_shuffle(time_points, in_data, shuffle_mode, detrend, stat)
+function shuffled_data = within_day_shuffle(time_points, in_data, shuffle_mode)
+% function shuffled_data = within_day_shuffle(time_points, in_data, shuffle_mode)
 % 
 
 
-% Default is to use a total reshuffle rather than circshift
+% Default is to use a complete reshuffle rather than circshift
 if nargin < 3
     shuffle_mode = 'complete';
-end
-
-% Default is not to normalise values for each day
-if nargin < 4
-    detrend = false;
-end
-
-% Default stat for normalising values for each day is 'mean' 
-if nargin < 5
-    stat = 'mean';
 end
 
 % Set start time from 00:00 at start of first day to 24:00 at end of final
@@ -40,19 +30,6 @@ for a = 1:n_days
     
     % Select data points from this day only
     day_data    = in_data(q_day);
-    
-    % If normalisation by day is requested,
-    if detrend
-        % depending on normalisation statistic ...
-        switch stat
-            case 'mean'
-                % Divide data for this day by its mean
-                day_data    = day_data / mean(day_data(:),'omitnan');
-            case 'median'
-                % Divide data for this day by its median
-                day_data    = day_data / median(day_data(:),'omitnan');
-        end
-    end
     
     % How many data points are there for this day?
     n_points    = length(day_data);

@@ -1,5 +1,5 @@
-function [time_bin_means, time_edges] = circadian_means(time_points, in_data, time_res, stat, detrend)
-% function [time_bin_means, bin_edges] = circadian_means(time_points, in_data, time_res, stat, detrend)
+function [time_bin_means, time_edges] = circadian_means(time_points, in_data, time_res, stat)
+% function [time_bin_means, bin_edges] = circadian_means(time_points, in_data, time_res, stat)
 %
 % Get mean or median values for IN_DATA in time bins around the 24h 
 % circadian cycle. TIME_POINTS specify the time points associated with the
@@ -24,9 +24,6 @@ function [time_bin_means, time_edges] = circadian_means(time_points, in_data, ti
 % STAT: Which statistic to use to generate each value. Default is  'mean',
 % but for a more robust estimate 'median' can be used.
 %
-% DETREND: Boolean - Remove long-term trends in the data by normalising
-% values to each day? Defaults to 'false'.
-%
 % 
 % OUTPUTS:
 % 
@@ -38,11 +35,6 @@ function [time_bin_means, time_edges] = circadian_means(time_points, in_data, ti
 %
 % 
 % Joram van Rheede 2021
-
-% Default to raw mean values without detrending by normalising each day
-if nargin < 5
-    detrend = false;
-end
 
 % Default to using mean if no statistic specified
 if nargin < 4 || isempty(stat)
@@ -60,35 +52,21 @@ time_of_day         = timeofday(time_points);
 % Create 'duration' variables for the time edges
 time_edges          = hours(0:time_res:24);
 
-% Does data need to be normalised within each day to remove longer term
-% trends?
-if detrend
-    % If so, make a circadian matrix with time binned data for each day,
-    % and divide by mean/median (depending on STAT) for that day using the
-    % 'detrend' option in make_circadian_matrix:
-    [normalised_circadian_matrix, time_edges]  = make_circadian_matrix(time_points, in_data, time_res, stat, detrend);
+% Loop to determine the mean values of in_data for each time bin
+n_bins              = length(time_edges) - 1;
+time_bin_means      = NaN(n_bins,1);
+for t_ind = 1:n_bins
     
-    % And take the median over all days for each time point
-    time_bin_means                  = median(normalised_circadian_matrix,'omitnan');
+    % Make boolean to select data from target time bin & combine with
+    % day boolean
+    q_timeofday = isbetween(time_of_day,time_edges(t_ind), time_edges(t_ind+1));
     
-else
-    
-    % Loop to determine the mean values of in_data for each time bin
-    n_bins              = length(time_edges) - 1;
-    time_bin_means      = NaN(n_bins,1);
-    for t_ind = 1:n_bins
-        
-        % Make boolean to select data from target time bin & combine with
-        % day boolean
-        q_timeofday = isbetween(time_of_day,time_edges(t_ind), time_edges(t_ind+1));
-        
-        % Get mean / median of data in this time bin
-        switch stat
-            case 'mean'
-                time_bin_means(t_ind)    = mean(in_data(q_timeofday),'omitnan');
-            case 'median'
-                time_bin_means(t_ind)    = median(in_data(q_timeofday),'omitnan');
-        end
+    % Get mean / median of data in this time bin
+    switch stat
+        case 'mean'
+            time_bin_means(t_ind)    = mean(in_data(q_timeofday),'omitnan');
+        case 'median'
+            time_bin_means(t_ind)    = median(in_data(q_timeofday),'omitnan');
     end
 end
 

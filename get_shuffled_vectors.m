@@ -15,8 +15,6 @@ function [shuffled_vector_lengths, shuffled_vector_dirs, p_val] = get_shuffled_v
 % within each day ('circshift') so as to preserve any local correlations in
 % the signal apart from those determined by time of day.
 % 
-% Data can be normalised within-day using the DETREND option, to ensure
-% that trends 
 % 
 % INPUTS:
 % 
@@ -32,13 +30,6 @@ function [shuffled_vector_lengths, shuffled_vector_dirs, p_val] = get_shuffled_v
 % 
 % SHUFFLE_MODE: 'complete' for complete shuffle of all values within each
 % day, or 'circshift' for 
-% 
-% DETREND: true or false. If true, will remove variability between days by
-% dividing each day by its mean or median value (mean vs. median determined
-% by STAT).
-% 
-% STAT: What summary statistic to use for de-trending the data - options
-% are 'mean' or 'median'.
 % 
 % 
 % OUTPUTS:
@@ -66,15 +57,6 @@ if nargin < 4
     shuffle_mode = 'complete';
 end
 
-% Don't normalise within day by default
-if nargin < 5
-    detrend = false;
-end
-
-% Default to using 'mean' for normalising values within each day
-if nargin < 6
-    stat = 'mean';
-end
 
 % pre-allocate the vector lengths and vector dirs for each shuffle
 shuffled_vector_lengths  = NaN(n_shuffles, 1);
@@ -86,7 +68,7 @@ for a = 1:n_shuffles
     end
     
     % Get shuffled data points
-    shuffled_data_points    = within_day_shuffle(time_points, in_data, shuffle_mode, detrend, stat);
+    shuffled_data_points    = within_day_shuffle(time_points, in_data, shuffle_mode);
     
     % Calculate resultant vector
     [shuffled_vector_lengths(a), shuffled_vector_dirs(a)] = circadian_vect(time_points,shuffled_data_points);
