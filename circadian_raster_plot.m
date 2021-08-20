@@ -62,7 +62,6 @@ end
 % x-axis aesthetics 
 xlim([0 24])
 xlabel('Time (h)')
-
 set(gca,'XTick',[0 6 12 18 24])
 set(gca,'XTickLabels',{'00:00' '06:00' '12:00' '18:00' '24:00'})
 
