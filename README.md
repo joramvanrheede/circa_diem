@@ -10,7 +10,14 @@ Circa Diem also allows for some statistical tests of the extent of non-uniformit
 
 ## Contents
 
+### Preprocessing
+
+`detrend_circadian_data`: Remove trends across multiple days by normalising values for each day to their mean or median.
+
+
 ### Plotting
+
+`circadian_summary_figure`: Generates a figure with the raw data series, a circadian matrix, a rose plot and a circadian resultant vector vs. a shuffled distribution.
 
 `circadian_rose`: Rose plot of circadian data
 
@@ -28,7 +35,7 @@ Circa Diem also allows for some statistical tests of the extent of non-uniformit
 
 `circadian_vect`: Calculate the resultant vector length and direction of circadian data.
 
-`detrend_circadian_data`: Remove longer-term trends in circadian data by 
+`within_day_shuffle`: Shuffle data values within each day, either as a completely new random permutation or by applying a random circshift.
 
 `get_shuffled_vectors`: Generate a distribution of circadian resultant vectors for shuffled data, and compare the actual resultant vector length with the distribution from the shuffled data to obtain a p-value that represents the probability of observing a circadian vector of this length in the shuffled distribution.
 
