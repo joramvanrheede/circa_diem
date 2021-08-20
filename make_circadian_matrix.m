@@ -55,8 +55,8 @@ end
 
 % Set start time from 00:00 at start of first day to 24:00 at end of final
 % day
-start_time  = dateshift(time_points(1),'start','day');
-end_time    = dateshift(time_points(end),'end','day');
+start_time  = dateshift(min(time_points),'start','day');
+end_time    = dateshift(max(time_points),'end','day');
 
 % Check number of days between time points
 n_days    	= between(start_time, end_time, 'days'); 
