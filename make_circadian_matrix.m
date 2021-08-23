@@ -38,6 +38,8 @@ function [circadian_matrix, time_edges] = make_circadian_matrix(time_points, in_
 
 if nargin < 3 || isempty(in_data)
     histogram_mode = true;
+else
+    histogram_mode = false;
 end
     
 % Default to 1-hour time bins
