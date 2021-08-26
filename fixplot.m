@@ -1,8 +1,14 @@
 function fixplot(font_size,font_name)
-% function FIXPLOT
+% function FIXPLOT(FONT_SIZE, FONT_NAME)
 % 
 % Quick aesthetics fix for cartesian axes plots in MATLAB. Edit defaults to 
 % your personal preferences.
+% 
+% OPTIONAL INPUTS:
+% 
+% FONT_SIZE: Sets axes ticks & labels font size (default is 14pt).
+% 
+% FONT_NAME: Sets axes ticks & labels font name (default is Helvetica).
 % 
 % Joram van Rheede, 2021
 
