@@ -31,21 +31,9 @@ detrended_values = detrend_circadian_data(event_times,event_values,'median');
 %% 1. Top row: running z-scored data (raw, not detrended)
 subplot(2,1,1)
 
-plot(event_times,zscore(event_values),'.-','MarkerSize',12);
-
-start_time  = dateshift(min(event_times),'start','day');
-end_time    = dateshift(max(event_times),'end','day');
-
-xlim([start_time, end_time])
+plot_zscored_timeseries(event_times, event_values)
 
 title('Z-scored data values over time')
-
-% Set y-axis label
-ylabel('Z-scored data')
-
-% A bunch of standard plot aesthetics commands wrapped in a function:
-fixplot
-
 
 %% 2. Bottom row 1: circadian matrix
 subplot(2,3,4)
