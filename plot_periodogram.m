@@ -6,7 +6,7 @@ function plot_periodogram(psd_estimate, time_periods, normalise, colour)
 if nargin < 4
     colour = [0 0 0];
 end
-colour
+
 if normalise
     % Divide each column in psd_estimate by its mean
     psd_estimate = psd_estimate ./ mean(psd_estimate);

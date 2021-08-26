@@ -14,7 +14,7 @@ end
 % Default to font size appropriate for single plots; smaller font size may
 % be required if using many subplots
 if nargin < 1 || isempty(font_size)
-    font_size = 16;
+    font_size = 14;
 end
 
 % Edit plot settings to increase legibility and improve aesthetics
