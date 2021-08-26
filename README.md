@@ -17,10 +17,23 @@ Circa Diem also allows for some statistical tests of the extent of non-uniformit
 `detrend_circadian_data`: Remove trends across multiple days by normalising values for each day to their mean or median.
 
 
-### Processing
+### Statistics
 
+`circadian_means`: Get mean or median values of circadian data in time bins around the 24h circadian cycle.
+
+`circadian_hist_counts`: Count events in time bins around the 24 circadian cycle.
 
 `make_circadian_matrix`: Represent a variable collected at a series of time points as a matrix with each row representing a day, and each column representing a time bin (in hours). Each point in the matrix will be the mean/median of values in this bin. For events-only data, the entries in the matrix instead represent event counts within each time bin. Can be visualised as a heatmap with plot_circadian_matrix.
+
+`circadian_rayleigh_test`: Performs a Rayleigh test on circadian data (uses [circstat](https://github.com/circstat/circstat-matlab)'s circ_rtest)
+
+`circadian_vect`: Calculate the resultant vector length and direction of circadian data.
+
+`circadian_periodogram`: Calculate the power spectral density of the fluctuations in the measured signal of interest on a timescale of hours.
+
+`within_day_shuffle`: Shuffle data values within each day, either as a completely new random permutation or by applying a random circshift.
+
+`get_shuffled_vectors`: Generate a distribution of circadian resultant vectors for shuffled data, and compare the actual resultant vector length with the distribution from the shuffled data to obtain a p-value that represents the probability of observing a circadian vector of this length in the shuffled distribution.
 
 
 ### Plotting
@@ -42,23 +55,6 @@ Circa Diem also allows for some statistical tests of the extent of non-uniformit
 `plot_shuffled_vectors`: Scatter plot of the resultant vectors 
 
 
-### Statistics
-
-`circadian_means`: Get mean or median values of circadian data in time bins around the 24h circadian cycle.
-
-`circadian_hist_counts`: Count events in time bins around the 24 circadian cycle.
-
-`circadian_rayleigh_test`: Performs a Rayleigh test on circadian data (uses [circstat](https://github.com/circstat/circstat-matlab)'s circ_rtest)
-
-`circadian_vect`: Calculate the resultant vector length and direction of circadian data.
-
-`circadian_periodogram`: Calculate the power spectral density of the fluctuations in the measured signal of interest on a timescale of hours.
-
-`within_day_shuffle`: Shuffle data values within each day, either as a completely new random permutation or by applying a random circshift.
-
-`get_shuffled_vectors`: Generate a distribution of circadian resultant vectors for shuffled data, and compare the actual resultant vector length with the distribution from the shuffled data to obtain a p-value that represents the probability of observing a circadian vector of this length in the shuffled distribution.
-
-
 ### Utilities
 
 `datetimes_to_angles`: Converts datetimes or durations to radian angles representing 24h between 0 and 2pi.
@@ -76,9 +72,9 @@ Circa Diem also allows for some statistical tests of the extent of non-uniformit
 
 **Work in progress...**
 
-`circadian_summary_figure`: provides an example of how to use many of the regularly sampled data visualisations in the toolbox.
+`circadian_summary_figure`: Provides an example of how to use many of the regularly sampled data visualisations in the toolbox.
 
-`circadian_event_figure`: provides an example of how to use the event-based visualisations in the toolbox.
+`circadian_event_figure`: Provides an example of how to use the event-based visualisations in the toolbox.
 
 
 ## Dependencies
