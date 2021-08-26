@@ -51,7 +51,7 @@ end
 
 
 % Plot labels
-set(gca,'XTick',[0:6:96])
+set(gca,'XTick',[0:6:max(time_periods)])
 xlabel('Period in hours')
 ylabel('Power spectral density')
 
