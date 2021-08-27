@@ -1,10 +1,12 @@
 # Circa Diem toolbox
+
 Matlab toolbox for plotting and analysis of circadian patterns in data.
  
-The Circa Diem toolbox is designed to generate circadian visualisations and analyses of data points with associated MATLAB 'datetime' values. The basic input data format for the toolbox is:
+The Circa Diem toolbox is designed to generate circadian visualisations and analyses of data points with associated MATLAB 'datetime' values. The basic input data format for the toolbox can be either:
 
-1) a series of time points as a vector of MATLAB 'datetimes' that correspond to events or measurement times, and 
-2) a series of values or weights corresponding to these measurement times or events
+1) a _**regularly spaced**_ series of time points as a vector of MATLAB 'datetimes' that correspond to events or measurement times, and a series of values or weights corresponding to these measurement times or events. Here the focus is on whether the measured variable has circadian properties.
+
+2) A series of event times. Here, the focus is on whether the event times are differently distributed across the times of day.
 
 Circa Diem also allows for some statistical tests of the extent of non-uniformity of circadian patterns. For this, the toolbox is heavily indebted to the [circstat_matlab](https://github.com/circstat/circstat-matlab) toolbox by Philipp Berens (some of the statistical functions are essentially wrapper functions around circstat functions).
 
@@ -13,6 +15,25 @@ Circa Diem also allows for some statistical tests of the extent of non-uniformit
 ### Preprocessing
 
 `detrend_circadian_data`: Remove trends across multiple days by normalising values for each day to their mean or median.
+
+
+### Statistics
+
+`circadian_means`: Get mean or median values of circadian data in time bins around the 24h circadian cycle.
+
+`circadian_hist_counts`: Count events in time bins around the 24 circadian cycle.
+
+`make_circadian_matrix`: Represent a variable collected at a series of time points as a matrix with each row representing a day, and each column representing a time bin (in hours). Each point in the matrix will be the mean/median of values in this bin. For events-only data, the entries in the matrix instead represent event counts within each time bin. Can be visualised as a heatmap with plot_circadian_matrix.
+
+`circadian_rayleigh_test`: Performs a Rayleigh test on circadian data (uses [circstat](https://github.com/circstat/circstat-matlab)'s circ_rtest)
+
+`circadian_vect`: Calculate the resultant vector length and direction of circadian data.
+
+`circadian_periodogram`: Calculate the power spectral density of the fluctuations in the measured signal of interest on a timescale of hours.
+
+`within_day_shuffle`: Shuffle data values within each day, either as a completely new random permutation or by applying a random circshift.
+
+`get_shuffled_vectors`: Generate a distribution of circadian resultant vectors for shuffled data, and compare the actual resultant vector length with the distribution from the shuffled data to obtain a p-value that represents the probability of observing a circadian vector of this length in the shuffled distribution.
 
 
 ### Plotting
@@ -25,27 +46,20 @@ Circa Diem also allows for some statistical tests of the extent of non-uniformit
 
 `circadian_raster_plot`: Raster plot of events across multiple days, with a row for each day, and a line for each event
 
-`plot_circadian_matrix`: Plot circadian data as a heatmap with a row for each day
+`plot_circadian_periodogram`: Plot the periodogram obtained from circadian_periodogram on a time scale appropriate for circadian studies. For data with real circadian variation, a clear peak at 24h is expected.
+
+`plot_circadian_matrix`: Plot circadian data as a heatmap with a row for each day, using output from `make_circadian_matrix`
 
 `plot_circadian_vector`: Plot the resultant vector of circadian data
 
 `plot_shuffled_vectors`: Scatter plot of the resultant vectors 
 
 
-### Statistics
-
-`circadian_means`: Get mean or median values of circadian data in time bins around the 24h circadian cycle.
-
-`circadian_rayleigh_test`: Performs a Rayleigh test on circadian data (uses [circstat](https://github.com/circstat/circstat-matlab)'s circ_rtest)
-
-`circadian_vect`: Calculate the resultant vector length and direction of circadian data.
-
-`within_day_shuffle`: Shuffle data values within each day, either as a completely new random permutation or by applying a random circshift.
-
-`get_shuffled_vectors`: Generate a distribution of circadian resultant vectors for shuffled data, and compare the actual resultant vector length with the distribution from the shuffled data to obtain a p-value that represents the probability of observing a circadian vector of this length in the shuffled distribution.
-
-
 ### Utilities
+
+`datetimes_to_angles`: Converts datetimes or durations to radian angles representing 24h between 0 and 2pi.
+
+`angles_to_time_of_day`: Converts radian angles to duration values between 0 and 24h.
 
 `circadian_plot_aesthetics`: Function to quickly turn MATLAB polar axes into an aesthetically pleasing representation of the 24h circadian cycle.
 
@@ -58,9 +72,9 @@ Circa Diem also allows for some statistical tests of the extent of non-uniformit
 
 **Work in progress...**
 
-`circadian_summary_figure`: provides an example of how to use many of the regularly sampled data visualisations in the toolbox.
+`circadian_summary_figure`: Provides an example of how to use many of the regularly sampled data visualisations in the toolbox.
 
-`circadian_event_figure`: provides an example of how to use the event-based visualisations in the toolbox.
+`circadian_event_figure`: Provides an example of how to use the event-based visualisations in the toolbox.
 
 
 ## Dependencies
