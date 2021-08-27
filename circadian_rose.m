@@ -1,5 +1,5 @@
-function [circadian_points, time_edges, plot_handle] = circadian_rose(time_points, in_data, time_res, stat)
-% FUNCTION [CIRCADIAN_POINTS, TIME_EDGES, PLOT_HANDLE] = CIRCADIAN_ROSE(TIME_POINTS,IN_DATA, TIME_RES, STAT)
+function [circadian_points, time_edges, plot_handle] = circadian_rose(time_points, in_data, time_res, stat, colour)
+% FUNCTION [CIRCADIAN_POINTS, TIME_EDGES, PLOT_HANDLE] = CIRCADIAN_ROSE(TIME_POINTS,IN_DATA, TIME_RES, STAT, COLOUR)
 % 
 % Creates a circadian (0-24h) rose plot of the means of IN_DATA across
 % the times of day contained in TIME_POINTS in the current axes, Petals 
@@ -26,6 +26,7 @@ function [circadian_points, time_edges, plot_handle] = circadian_rose(time_point
 % STAT: Which statistic to use to generate each binned value. Default is 
 % 'mean', but for a more robust estimate 'median' can be used.
 % 
+% COLOUR: Plot colour [R G B].
 % 
 % OUTPUTS:
 % 
@@ -69,8 +70,14 @@ circadian_plot_times    = [circadian_plot_times(:); circadian_plot_times(1)];
 circadian_plot_points   = [circadian_points(:) circadian_points(:) zeros(size(circadian_points(:)))]';
 circadian_plot_points   = [circadian_plot_points(:); circadian_plot_points(1)];
 
-% get mean or median of all in_values at each 1h point
-plot_handle             = polarplot(circadian_plot_times(:),circadian_plot_points(:),'LineWidth',2);
+% Use the polar plot function to plot the line
+if nargin > 4
+    % If colour is specified then use that
+    plot_handle             = polarplot(circadian_plot_times(:),circadian_plot_points(:),'LineWidth',2, 'Color', colour);
+else
+    % Otherwise don't specify and let MATLAB handle colour selection
+    plot_handle             = polarplot(circadian_plot_times(:),circadian_plot_points(:),'LineWidth',2);
+end
 
 % Function that adjusts the labels & aesthetics on circadian plots
 circadian_plot_aesthetics
