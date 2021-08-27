@@ -1,5 +1,5 @@
-function im_handle = plot_circadian_matrix(circadian_matrix, percentile_cutoff)
-% function [circadian_matrix, time_edges] = plot_circadian_matrix(circadian_matrix)
+function im_handle = plot_circadian_matrix(circadian_matrix, percentile_cutoff, colour)
+% function [circadian_matrix, time_edges] = plot_circadian_matrix(circadian_matrix, percentile_cutoff)
 % 
 % Plot a circadian matrix generated with make_circadian_matrix. option to
 % cut off top and bottom percentiles to avoid effect of very small or large
@@ -12,6 +12,10 @@ function im_handle = plot_circadian_matrix(circadian_matrix, percentile_cutoff)
 %
 % CIRCADIAN_MATRIX: A circadian matrix obtained via 'make_circadian_matrix'
 % 
+% PERCENTILE_CUTOFF: A precentile to be cut off from the colormap on either
+% side so avoid extreme values having too much influence on the color
+% scale.
+% 
 % 
 % OUTPUTS:
 % 
@@ -20,7 +24,15 @@ function im_handle = plot_circadian_matrix(circadian_matrix, percentile_cutoff)
 % 
 % Joram van Rheede, 2021
 
-if nargin < 2
+if nargin < 3 
+    % Use whatever is default / current
+    matrix_colour_map   = colormap;
+else
+    % Make colour map from speficied colour
+    matrix_colour_map   = colormap_from_color(colour);
+end
+
+if nargin < 2 || isempty(percentile_cutoff)
     percentile_cutoff = 0;
 end
 
@@ -29,7 +41,7 @@ im_handle = imagesc(circadian_matrix);
 
 % Exclude top and bottom 2% from colour range to keep the colormap
 % informative despite outliers in the data
-set(gca,'CLim',prctile(circadian_matrix(:),[percentile_cutoff 100-percentile_cutoff]))
+set(gca,'CLim',prctile(circadian_matrix(:),[percentile_cutoff 100-percentile_cutoff]),'Colormap',matrix_colour_map)
 
 % Add axis labels and set tick points
 ylabel('Days')
