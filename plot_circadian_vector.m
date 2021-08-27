@@ -30,11 +30,11 @@ end
 
 for a = 1:length(vector_length)
     % Make polar plot and plot vector as line from origin
-    hndl.line   = polarplot([0 vector_dir(a)],[0 vector_length(a)],'-','LineWidth',3,'Color',vect_color);
+    hndl.line   = polarplot([0 vector_dir(a)],[0 vector_length(a)],'-','LineWidth',2,'Color',vect_color);
     
     % Add a dot at the end of the vector
     hold on
-    hndl.marker = polarplot(vector_dir(a), vector_length(a),'.','MarkerSize',25,'Color',vect_color);
+    hndl.marker = polarplot(vector_dir(a), vector_length(a),'.','MarkerSize',20,'Color',vect_color);
 end
 
 % Function to make circadian polar plot look nice
