@@ -1,4 +1,4 @@
-function circadian_summary_figure(event_times, event_values)
+function circadian_summary_figure(event_times, event_values,time_res)
 % circadian_summary_figure(event_times, event_values)
 % 
 % Generates a summary figure for a circadian data set, with the following
@@ -13,6 +13,10 @@ function circadian_summary_figure(event_times, event_values)
 % vectors
 % 
 % Joram van Rheede, 2021
+
+if nargin < 3
+    time_res = 1
+end
 
 % Initialise figure
 figure
@@ -40,7 +44,7 @@ subplot(2,3,4)
 
 % Make a circadian matrix, a summary of the data over time in which each
 % row corresponds to a day and each column corresponds to a time of day bin
-circadian_matrix = make_circadian_matrix(event_times, detrended_values, 1, 'median');
+circadian_matrix = make_circadian_matrix(event_times, detrended_values, time_res, 'median');
 
 % Plot circadian matrix as a heatmap image
 plot_circadian_matrix(circadian_matrix,2);
@@ -50,7 +54,7 @@ plot_circadian_matrix(circadian_matrix,2);
 subplot(2,3,5)
 
 % Circadian rose plot: A representation of the data across the 24h cycle
-circadian_rose(event_times, detrended_values, 1, 'median');
+circadian_rose(event_times, detrended_values, time_res, 'median');
 
 
 %% 4. Bottom row 3: Circadian vector + shuffled & p-value (rayleigh as well as shuffled p)
