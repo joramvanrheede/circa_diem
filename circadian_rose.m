@@ -61,23 +61,31 @@ circadian_points        = circadian_points(:);
 % Convert 24h range to radians for polar representation
 time_edges_radians      = ((0:time_res:24)/24) * 2 * pi;
 
-% Each petal is a line that goes from edge 1 to edge 2 and then to 0
-circadian_plot_times    = [time_edges_radians(1:end-1)' time_edges_radians(2:end)' zeros(size(circadian_points(:)))]';
-circadian_plot_times    = [circadian_plot_times(:); circadian_plot_times(1)];
 
-% Each value should be replicated for a line from edge 1 to edge 2, followed 
-% by a zero for the line back to the origin / centre
-circadian_plot_points   = [circadian_points(:) circadian_points(:) zeros(size(circadian_points(:)))]';
-circadian_plot_points   = [circadian_plot_points(:); circadian_plot_points(1)];
-
-% Use the polar plot function to plot the line
 if nargin > 4
-    % If colour is specified then use that
-    plot_handle             = polarplot(circadian_plot_times(:),circadian_plot_points(:),'LineWidth',2, 'Color', colour);
+    % Try using polarhist 
+    polarhistogram('BinEdges',time_edges_radians,'BinCounts',circadian_points,'FaceColor',colour)
 else
-    % Otherwise don't specify and let MATLAB handle colour selection
-    plot_handle             = polarplot(circadian_plot_times(:),circadian_plot_points(:),'LineWidth',2);
+    polarhistogram('BinEdges',time_edges_radians,'BinCounts',circadian_points)
 end
+
+% % Each petal is a line that goes from edge 1 to edge 2 and then to 0
+% circadian_plot_times    = [time_edges_radians(1:end-1)' time_edges_radians(2:end)' zeros(size(circadian_points(:)))]';
+% circadian_plot_times    = [circadian_plot_times(:); circadian_plot_times(1)];
+% 
+% % Each value should be replicated for a line from edge 1 to edge 2, followed 
+% % by a zero for the line back to the origin / centre
+% circadian_plot_points   = [circadian_points(:) circadian_points(:) zeros(size(circadian_points(:)))]';
+% circadian_plot_points   = [circadian_plot_points(:); circadian_plot_points(1)];
+% 
+% % Use the polar plot function to plot the line
+% if nargin > 4
+%     % If colour is specified then use that
+%     plot_handle             = polarplot(circadian_plot_times(:),circadian_plot_points(:),'LineWidth',2, 'Color', colour);
+% else
+%     % Otherwise don't specify and let MATLAB handle colour selection
+%     plot_handle             = polarplot(circadian_plot_times(:),circadian_plot_points(:),'LineWidth',2);
+% end
 
 % Function that adjusts the labels & aesthetics on circadian plots
 circadian_plot_aesthetics
