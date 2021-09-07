@@ -20,12 +20,20 @@ function plot_zscored_timeseries(event_times, event_values, colour)
 % 
 % Joram van Rheede, 2021
 
+
 if nargin < 3
     % Plot zscored data using automatic MATLAB colour assignment
-    plot(event_times,zscore(event_values,0,'omitnan'),'.','MarkerSize',12);
+    scatter(event_times,zscore(event_values,0,'omitnan'),12,'filled');
 else
+    if length(colour) == 4
+        alpha_val   = colour(4);
+        colour      = colour(1:3);
+    else
+        alpha_val   = 1;
+    end
+        
     % Plot zscored data using colour specified by user
-    plot(event_times,zscore(event_values,0,'omitnan'),'.','MarkerSize',12,'Color',colour);
+    scatter(event_times,zscore(event_values,0,'omitnan'),10,colour,'filled','MarkerFaceAlpha',alpha_val,'MarkerEdgeAlpha',alpha_val);
 end
 
 % Set xlims from start of first day to end of last day
