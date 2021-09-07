@@ -1,11 +1,11 @@
-function [time_stamps, values] = generate_example_timeseries(n_days, sample_freq, signal_perc, smoothing)
+function [time_stamps, values] = generate_example_timeseries(n_days, sample_freq, signal_perc)
 % function [time_stamps, values] = generate_example_timeseries(n_days, sample_freq, signal_perc, noise_perc)
 % 
 % 
 % 
 
 if nargin < 4
-    smoothing = 5;
+    smoothing = 5
 end
 
 if nargin < 3
