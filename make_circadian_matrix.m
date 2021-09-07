@@ -1,3 +1,4 @@
+
 function [circadian_matrix, time_edges] = make_circadian_matrix(time_points, in_data, time_res, stat)
 % function [CIRCADIAN_MATRIX, TIME_EDGES] = MAKE_CIRCADIAN_MATRIX(TIME_POINTS, IN_DATA, TIME_RES, STAT)
 %  
