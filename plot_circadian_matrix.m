@@ -1,5 +1,5 @@
 function im_handle = plot_circadian_matrix(circadian_matrix, percentile_cutoff, colour)
-% function [circadian_matrix, time_edges] = plot_circadian_matrix(circadian_matrix, percentile_cutoff)
+% function [circadian_matrix, time_edges] = plot_circadian_matrix(circadian_matrix, percentile_cutoff, colour)
 % 
 % Plot a circadian matrix generated with make_circadian_matrix. option to
 % cut off top and bottom percentiles to avoid effect of very small or large
