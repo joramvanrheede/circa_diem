@@ -30,9 +30,9 @@ end
 
 %% 
 
-data_mean           = nanmean(in_data);
-data_std            = nanstd(in_data);
-data_median         = nanmedian(in_data);
+data_mean           = nanmean(in_data,1);
+data_std            = nanstd(in_data,1);
+data_median         = nanmedian(in_data,1);
 data_n              = sum(~isnan(in_data));
 
 switch error_mode
@@ -41,7 +41,7 @@ switch error_mode
         low_vec             = data_mean - data_std;
         mid_trace           = data_mean;
     case 'serr'
-        data_serr           = data_std / sqrt(data_n);
+        data_serr           = data_std ./ sqrt(data_n);
         high_vec            = data_mean + data_serr;
         low_vec             = data_mean - data_serr;
         mid_trace           = data_mean;
@@ -59,8 +59,12 @@ over_n_under_vec  	= [high_vec low_vec(end:-1:1)];
 there_n_back_vec    = [x_vals x_vals(end:-1:1)];
 
 if show_individual
-    plot(x_vals, in_data,'LineWidth',0.5,'Color',[0 0 0 .2])
+    plot(x_vals, in_data','LineWidth',0.5,'Color',[0 0 0 .2])
     hold on
+end
+
+if size(there_n_back_vec,2) ~= size(over_n_under_vec,2)
+	keyboard
 end
 
 fill(there_n_back_vec,over_n_under_vec,shade_color,'LineStyle','none','FaceAlpha',.6)
