@@ -20,6 +20,11 @@ bin_centres     = [bin_centres(:); bin_centres(end)+median(diff(bin_centres))];
 % between 00:00 - 00:30 and 23:30 - 24:00
 time_bin_means  = [time_bin_means(end); time_bin_means(:); time_bin_means(1)];
 
+% Fill empty values with neighbouring ones
+if any(isnan(time_bin_means)) && ~all(isnan(time_bin_means))
+    time_bin_means = interpolate_nans(bin_centres, time_bin_means, true);
+end
+
 % Produce fit_object
 fit_obj         = fit(bin_centres, time_bin_means, 'linearinterp');
 
