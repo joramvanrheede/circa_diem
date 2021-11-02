@@ -17,15 +17,15 @@ function circadian_plot_aesthetics(font_size, font_name)
 % 
 % Joram van Rheede 2021
 
-% Default to Helvetica
+% Default to Arial
 if nargin < 2
-    font_name = 'Helvetica';
+    font_name = 'Arial';
 end
 
 % Default to font size appropriate for single plots; smaller font size may
 % be required if using many subplots
 if nargin < 1 || isempty(font_size)
-    font_size = 14;
+    font_size = 12;
 end
 
 % Start from the top and go clockwise

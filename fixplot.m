@@ -12,18 +12,18 @@ function fixplot(font_size,font_name)
 % 
 % Joram van Rheede, 2021
 
-% Default to Helvetica
+% Default to Arial
 if nargin < 2
-    font_name = 'Helvetica';
+    font_name = 'Arial';
 end
 
 % Default to font size appropriate for single plots; smaller font size may
 % be required if using many subplots
 if nargin < 1 || isempty(font_size)
-    font_size = 14;
+    font_size = 12;
 end
 
 % Edit plot settings to increase legibility and improve aesthetics
-set(gca,'LineWidth',2,'FontSize',font_size,'FontName',font_name,'FontWeight','Bold','TickDir','out','box','off')
+set(gca,'LineWidth',2,'FontSize',font_size,'FontName',font_name,'FontWeight','Bold','TickDir','out','box','off','XColor',[0 0 0],'YColor',[0 0 0])
 
 
