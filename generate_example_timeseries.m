@@ -5,7 +5,7 @@ function [time_stamps, values] = generate_example_timeseries(n_days, sample_freq
 % 
 
 if nargin < 4
-    smoothing = 5
+    smoothing = 5;
 end
 
 if nargin < 3
