@@ -1,14 +1,14 @@
 function [time_stamps, values] = generate_example_timeseries(n_days, sample_freq, signal_perc, smoothing)
-% function [time_stamps, values] = generate_example_timeseries(n_days, sample_freq, signal_perc, smoothing)
+% FUNCTION [TIME_STAMPS, VALUES] = GENERATE_EXAMPLE_TIMESERIES(N_DAYS, SAMPLE_FREQ, SIGNAL_PERC, SMOOTHING)
 % 
 % Basic simulation function to generate an example timeseries containing a 
-% sinusoidal circadian component within noise. Outputs regularly spaced
-% measurement TIME_STAMPS and associated simulated VALUES. 
+% sinusoidal circadian component that peaks at noon within noise. Outputs 
+% regularly spaced measurement TIME_STAMPS and associated simulated VALUES. 
 % 
 % By itself, GENERATE_EXAMPLE_TIMESERIES will generate 10 days worth of
-% data sampled at 2 samples/hour with 20% signal within 80% noise smoothed
-% with a moving average window of 5 samples. These properties can be
-% controlled with the input variables below.
+% data sampled at 2 samples/hour with 20% sinusoidal signal within 80% 
+% noise smoothed with a moving average window of 5 samples. These 
+% properties can be controlled with the input variables below.
 % 
 % INPUTS:
 % 
@@ -56,7 +56,7 @@ if nargin < 1
     n_days = 10;
 end
 
-
+% Work out number of samples across 24 hours
 samples_per_day = sample_freq * 24;
 n_samples       = samples_per_day * n_days;
 
@@ -72,11 +72,11 @@ time_stamps     = dateshift(datetime('now'),'start','day') + sample_hours';
 % Random values between 0 and 1
 random_values   = rand([n_samples,1]);
 
-% Sinusoid between 0 and 1
+% Sinusoid between 0 and 1, with offset to place peak at 12 noon
 sine_xvals      = sample_inds / samples_per_day * 2 * pi;
-sine_values     = 0.5 * sin(sine_xvals) + 1;
+sine_values     = 0.5 * sin(sine_xvals - 0.5*pi) + 1;
 
-
+% Convert the percentage of signal to a proportion
 signal_prop     = signal_perc / 100;
 
 % Generate final signal from sine wave plus noise
