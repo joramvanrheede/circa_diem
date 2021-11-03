@@ -1,4 +1,3 @@
-
 function [circadian_matrix, time_edges] = make_circadian_matrix(time_points, in_data, time_res, stat)
 % function [CIRCADIAN_MATRIX, TIME_EDGES] = MAKE_CIRCADIAN_MATRIX(TIME_POINTS, IN_DATA, TIME_RES, STAT)
 %  
@@ -16,7 +15,9 @@ function [circadian_matrix, time_edges] = make_circadian_matrix(time_points, in_
 %
 % IN_DATA: A vector of data values, with a corresponding value for each
 % time point in TIME_POINTS. Use NaNs for missing data, they will be
-% ignored.
+% ignored. If IN_DATA is absent or empty, the circadian matrix will instead
+% enter 'EVENTS MODE', and values in the circadian matrix will represent
+% event counts.
 %
 % TIME_RES: The time resolution in hours, i.e. the size of the time bins 
 % for creating the entries in the circadian matrix. Defaults to 1 (hour),
