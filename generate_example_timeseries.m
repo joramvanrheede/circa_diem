@@ -34,7 +34,6 @@ function [time_stamps, values] = generate_example_timeseries(n_days, sample_freq
 % 
 % Circa Diem Toolbox 2021
 
-
 % Default smoothing to generate stronger local correlations between
 % successive time points
 if nargin < 4
@@ -55,6 +54,7 @@ end
 if nargin < 1
     n_days = 10;
 end
+
 
 % Work out number of samples across 24 hours
 samples_per_day = sample_freq * 24;
