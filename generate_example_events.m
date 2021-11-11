@@ -51,3 +51,5 @@ for a = 1:n_days
     event_times     = [event_times; day_event_times(:) + days(a)];
 end
 
+% Sort the event times so that they are sequential
+event_times = sort(event_times);
