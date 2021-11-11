@@ -22,7 +22,7 @@ function time_of_day = angles_to_time_of_day(in_angles)
 % day (as a Matlab duration) corresponding to IN_ANGLES.
 %
 % 
-% Joram van Rheede, 2021
+% Circa Diem toolbox 2021
 
 % Divide by 2*pi to convert angles to proportions
 angle_proportion    = in_angles / (2 * pi);
