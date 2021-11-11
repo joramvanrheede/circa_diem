@@ -79,6 +79,7 @@ random_times = get_random_times(start_time, end_time, length(event_times),1000);
 % Get random vectors
 [random_vect_lengths, random_vect_dirs] = circadian_vect(random_times);
 
+% Calculate p-value with respect to random vector lengths
 p_val = sum(random_vect_lengths >= vector_length) / length(random_times);
 
 % Plot the shuffled vectors as a transparent scatter point cloud
