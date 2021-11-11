@@ -1,22 +1,27 @@
 function circadian_event_summary(event_times)
-% circadian_event_summary(event_times)
+% function CIRCADIAN_EVENT_SUMMARY(EVENT_TIMES)
 % 
-% Generates a summary figure for a circadian events data set, with the following
+% Generates a circadian summary figure for a data set consisting of
+% EVENT_TIMES specified as a vector of datetimes, with the following
 % panels:
 % 
 % 1. Top row: A histogram of the event times across the data collection
-% time
+% time.
 % 
 % 2. Bottom left - A circadian matrix - the event times histogram counts
-% represented as a heatmap of n_days * n_times
+% represented as a heatmap of n_days * n_times.
 %
 % 3. Bottom centre - A circadian histogram showing event counts around the
-% 24h circadian cycle
+% 24h circadian cycle.
 %
 % 4. Bottom right - the circadian resultant vector plus a point cloud of
-% vectors generated from random event times
+% vectors generated from random event times.
 % 
-% Circa Diem toolbox 2021
+% INPUT:
+% 
+% EVENT_TIMES: A vector of datetimes specifying the event times.
+% 
+% Circa Diem Toolbox 2021
 
 % Initialise figure
 figure
@@ -31,15 +36,21 @@ set(gcf,'Units','normalized','Position',[.1 .2 .8 .6])
 %% 1. Top row: running z-scored data (raw, not detrended)
 subplot(2,1,1)
 
+% Make sure event counting starts on the beginning of the first day and 
+% ends on the end of the last day in the data set
 start_time  = dateshift(min(event_times),'start','day');
 end_time    = dateshift(max(event_times),'end','day');
 
+% Set bin edges for the histogram over time
 time_edges  = start_time:hours(1):end_time;
 
+% Make histogram of event times
 histogram(event_times, time_edges);
 
+% Make axes tight around histogram bins
 xlim([start_time, end_time])
 
+% Add title
 title('Histogram of events over time')
 
 % Set y-axis label
@@ -67,7 +78,7 @@ subplot(2,3,5)
 circadian_histogram(event_times);
 
 
-%% 4. Bottom row 3: Circadian vector + shuffled & p-value (rayleigh as well as shuffled p)
+%% 4. Bottom row 3: Circadian vector + shuffled & p-value
 subplot(2,3,6)
 
 % Get the circadian resultant vector length and direction
