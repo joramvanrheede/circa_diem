@@ -3,6 +3,7 @@ function circadian_event_summary(event_times)
 % 
 % Generates a summary figure for a circadian events data set, with the following
 % panels:
+% 
 % 1. Top row: A histogram of the event times across the data collection
 % time
 % 
@@ -15,7 +16,7 @@ function circadian_event_summary(event_times)
 % 4. Bottom right - the circadian resultant vector plus a point cloud of
 % vectors generated from random event times
 % 
-% Joram van Rheede, 2021
+% Circa Diem toolbox 2021
 
 % Initialise figure
 figure
