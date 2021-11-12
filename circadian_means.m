@@ -34,7 +34,7 @@ function [time_bin_means, time_edges] = circadian_means(time_points, in_data, ti
 % determined by TIME_RES
 %
 % 
-% Joram van Rheede 2021
+% Circa Diem Toolbox 2021
 
 % Default to using mean if no statistic specified
 if nargin < 4 || isempty(stat)
@@ -46,7 +46,7 @@ if nargin < 3 || isempty(time_res)
     time_res = 1;
 end
 
-% get info about time of day
+% Get info about time of day
 time_of_day         = timeofday(time_points);
 
 % Create 'duration' variables for the time edges
