@@ -83,4 +83,4 @@ signal_prop     = signal_perc / 100;
 values          = signal_prop * sine_values(:) + (1-signal_prop) * random_values(:);
 
 % smooth signal
-values          = smooth(values,smoothing);
+values          = smoothdata(values,'movmean',smoothing);
