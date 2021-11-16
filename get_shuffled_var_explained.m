@@ -1,21 +1,25 @@
-function [shuffled_var_explained, p_val] = get_shuffled_var_explained(time_stamps, values, n_shuffles)
+function [shuffled_var_explained, p_val] = get_shuffled_var_explained(time_stamps, values, time_res, n_shuffles, shuffle_mode)
 % function get_shuffled_var_explained(time_stamps, values)
 % 
 % Use shuffle to see if variance explained is significant
+%
 % 
-% Joram van Rheede, 2021
+% Circa Diem Toolbox 2021
 
+% Default to time resolution of 1 hour
+if nargin < 3 || isempty(time_res)
+    time_res = 1;
+end
 
 % If no n_shuffles has been specified, default to 1000
-if nargin < 3 || isempty(n_shuffles)
+if nargin < 4 || isempty(n_shuffles)
     n_shuffles = 1000;
 end
 
 % Default to complete shuffle rather than circshift
-if nargin < 4
+if nargin < 5
     shuffle_mode = 'circshift';
 end
-
 
 % pre-allocate the vector lengths and vector dirs for each shuffle
 shuffled_var_explained     = NaN(n_shuffles, 1);
@@ -30,7 +34,7 @@ for a = 1:n_shuffles
     shuffled_data_points    = within_day_shuffle(time_stamps, values, shuffle_mode);
     
     % Calculate resultant vector
-    shuffled_var_explained(a) = variance_explained_by_timeofday(time_stamps, shuffled_data_points);
+    shuffled_var_explained(a) = variance_explained_by_timeofday(time_stamps, shuffled_data_points, time_res);
     
 end
 
