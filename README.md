@@ -72,6 +72,8 @@ Circa Diem also allows for some statistical tests of the extent of non-uniformit
 
 **Work in progress...**
 
+`Timeseries_tutorial_script`: A script that generates some example data and provides example code for using many of the toolbox's time-series-oriented functions.
+
 `circadian_summary_figure`: Provides an example of how to use many of the regularly sampled data visualisations in the toolbox.
 
 `circadian_event_figure`: Provides an example of how to use the event-based visualisations in the toolbox.
