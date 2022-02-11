@@ -1,14 +1,14 @@
 # Circa Diem toolbox
 
-Matlab toolbox for plotting and analysis of circadian patterns in data.
+Matlab toolbox for plotting and analysis of diurnal patterns in data.
  
-The Circa Diem toolbox is designed to generate circadian visualisations and analyses of data points with associated MATLAB 'datetime' values. The basic input data format for the toolbox can be either:
+The Circa Diem toolbox is designed to generate diurnal visualisations and analyses of data points with associated MATLAB 'datetime' values. The basic input data format for the toolbox can be either:
 
-1) a _**regularly spaced**_ series of time points as a vector of MATLAB 'datetimes' that correspond to events or measurement times, and a series of values or weights corresponding to these measurement times or events. Here the focus is on whether the measured variable has circadian properties.
+1) a _**regularly spaced**_ series of time points as a vector of MATLAB 'datetimes' that correspond to events or measurement times, and a series of values or weights corresponding to these measurement times or events. Here the focus is on whether the measured variable has diurnal properties.
 
 2) A series of event times. Here, the focus is on whether the event times are differently distributed across the times of day.
 
-Circa Diem also allows for some statistical tests of the extent of non-uniformity of circadian patterns. For this, the toolbox is heavily indebted to the [circstat_matlab](https://github.com/circstat/circstat-matlab) toolbox by Philipp Berens (some of the statistical functions are essentially wrapper functions around circstat functions).
+Circa Diem also allows for some statistical tests of the extent of non-uniformity of diurnal patterns. For this, the toolbox is indebted to the [circstat_matlab](https://github.com/circstat/circstat-matlab) toolbox by Philipp Berens (some of the statistical functions are essentially wrapper functions around circstat functions).
 
 ## Contents
 
