@@ -40,6 +40,10 @@ for a = 1:n_days
     % How many data points are there for this day?
     n_points    = length(day_data);
     
+    if n_points == 0
+        continue
+    end
+
     % Depending on shuffle mode:
     switch shuffle_mode
         case 'complete'
