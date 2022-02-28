@@ -49,10 +49,10 @@ fit_to_data             = fit_obj(time_stamps_numeric);
 fit_subtracted_data     = values - fit_to_data;
 
 % Variance of input VALUES
-pre_var                 = var(values);
+pre_var                 = var(values,'omitnan');
 
 % Variance after subtracting the fit to timeofday means
-post_var                = var(fit_subtracted_data);
+post_var                = var(fit_subtracted_data,'omitnan');
 
 % Calculate proportion of variance explained
 var_explained           = (pre_var - post_var) / pre_var;
