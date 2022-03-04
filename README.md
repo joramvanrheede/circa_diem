@@ -1,8 +1,9 @@
-![Greenwich 24h clock embossed with circa diem rose plot](https://github.com/joramvanrheede/circa_diem/blob/main/Greenwich_clock_embossed_with_blue_Beta.png?raw=true)
 
 # Circa Diem toolbox
 
-Matlab toolbox for plotting and analysis of diurnal patterns in data.
+## Matlab toolbox for plotting and analysis of diurnal patterns in data.
+ 
+<img src="https://github.com/joramvanrheede/circa_diem/blob/main/Greenwich_clock_embossed_with_blue_Beta.png" alt="Greenwich 24h clock with rose plot of diurnal data" width="200"/>
  
 The Circa Diem toolbox is designed to generate diurnal visualisations and analyses of data points with associated MATLAB 'datetime' values. The basic input data format for the toolbox can be either:
 
