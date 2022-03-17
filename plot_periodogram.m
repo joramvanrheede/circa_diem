@@ -56,4 +56,4 @@ xlabel('Period in hours')
 ylabel('Power spectral density')
 
 % Aesthetics
-fixplot
+fixplot(12)
