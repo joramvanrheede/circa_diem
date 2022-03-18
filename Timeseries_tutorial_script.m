@@ -95,9 +95,19 @@ percentile_cutoff   = 2; % For the colour scale of the heatmap, ignore the top a
 figure
 plot_circadian_matrix(circadian_matrix, percentile_cutoff, my_favourite_colour);
 
+%% 7: Demo of circshift shuffle
+
+% Get shuffled data points
+shuffled_data_points    = within_day_shuffle(time_stamps, values, 'circshift');
+
+[circadian_matrix, time_edges] = make_circadian_matrix(time_stamps, shuffled_data_points, time_res);
+   
+
+figure
+plot_circadian_matrix(circadian_matrix, percentile_cutoff, my_favourite_colour);
 
 
-%% 7: Calculate circadian vector
+%% 8: Calculate circadian vector
 % *uses the circstat toolbox
 n_shuffles  = 200;
 
@@ -107,7 +117,7 @@ figure
 plot_circadian_vector(vector_length, vector_dir, my_favourite_colour);
 
 
-%% 8: Generate shuffled distribution, plot shuffled vectors
+%% 9: Generate shuffled distribution, plot shuffled vectors
 
 [shuffled_vector_lengths, shuffled_vector_dirs] = get_shuffled_vectors(time_stamps, values, n_shuffles);
 
