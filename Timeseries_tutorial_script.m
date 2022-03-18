@@ -37,6 +37,8 @@ plot_zscored_timeseries(time_stamps, values, my_favourite_colour)
 
 
 %% 3: Visualise circadian periodicity in the data
+figure
+set(gcf,'Units','Normalized','Position',[.3 .3 .4 .3])
 
 time_res        = 1; % time resolution (in hours) for periodogram
 max_period      = 72; % Maximum period of 1 week = 168 hours
@@ -46,8 +48,6 @@ do_normalise    = true; % Whether to normalise the periodogram
 [psd_estimate, time_periods] = circadian_periodogram(time_stamps, values, time_res, max_period);
 
 % Plot the periodogram
-figure
-set(gcf,'Units','Normalized','Position',[.3 .4 .4 .2])
 plot_periodogram(psd_estimate, time_periods, do_normalise, my_favourite_colour)
 
 
@@ -56,7 +56,7 @@ plot_periodogram(psd_estimate, time_periods, do_normalise, my_favourite_colour)
 % *Currently requires curve fitting toolbox
 
 time_res        = 1;
-n_shuffles      = 1000;
+n_shuffles      = 200;
 shuffle_type    = 'circshift';
 
 % Get the proportion of variance explained by time of day
@@ -72,7 +72,10 @@ plot_timeofday_fit(time_stamps, values, time_res, my_favourite_colour)
 % Add the variance explained by time of day & p-val to the figure title
 title(['Var explained by TOD: ' num2str(var_explained) ', p =' num2str(var_explained_p)])
 
-
+%% Alternative - polar plot
+% Plot a fit based on time of day to the data across days
+figure
+plot_timeofday_fit(time_stamps, values, time_res, my_favourite_colour,'polar')
 
 %% 5: Plot circadian rose plot
 time_res    = 1;
@@ -82,7 +85,7 @@ figure
 circadian_rose(time_stamps, values, time_res, stat, my_favourite_colour)
 
 
-%% 6: Make heatmap of
+%% 6: Make heatmap of signal over time of day (rows) and 
 
 time_res            = 1; % Temporal resolution of time bins (= heatmap pixels)
 percentile_cutoff   = 2; % For the colour scale of the heatmap, ignore the top and bottom x% of data
@@ -96,12 +99,17 @@ plot_circadian_matrix(circadian_matrix, percentile_cutoff, my_favourite_colour);
 
 %% 6: Calculate circadian vector
 % *uses the circstat toolbox
+n_shuffles  = 200;
 
 [vector_length, vector_dir] = circadian_vect(time_stamps, values);
-
-[shuffled_vector_lengths, shuffled_vector_dirs] = get_shuffled_vectors(time_stamps, values);
 
 figure
 plot_circadian_vector(vector_length, vector_dir, my_favourite_colour);
 
+%% plot the shuffled vectors
+
+[shuffled_vector_lengths, shuffled_vector_dirs] = get_shuffled_vectors(time_stamps, values, n_shuffles);
+
+hold on
+plot_circadian_vector(shuffled_vector_lengths, shuffled_vector_dirs,[.5 .5 .5])
 
