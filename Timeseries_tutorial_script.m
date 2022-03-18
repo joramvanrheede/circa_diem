@@ -27,13 +27,11 @@ smoothing       = 3; % Smoothing window for moving average smoothing (in samples
 [time_stamps, values]   = generate_example_timeseries(n_days, sample_freq, signal_perc, smoothing);
 
 
-
 %% 2: Visualise the basic data set 
 
 figure
 set(gcf,'Units','Normalized','Position',[.2 .4 .6 .25])
 plot_zscored_timeseries(time_stamps, values, my_favourite_colour)
-
 
 
 %% 3: Visualise circadian periodicity in the data
@@ -73,9 +71,11 @@ plot_timeofday_fit(time_stamps, values, time_res, my_favourite_colour)
 title(['Var explained by TOD: ' num2str(var_explained) ', p =' num2str(var_explained_p)])
 
 %% Alternative - polar plot
+
 % Plot a fit based on time of day to the data across days
 figure
 plot_timeofday_fit(time_stamps, values, time_res, my_favourite_colour,'polar')
+
 
 %% 5: Plot circadian rose plot
 time_res    = 1;
@@ -97,7 +97,7 @@ plot_circadian_matrix(circadian_matrix, percentile_cutoff, my_favourite_colour);
 
 
 
-%% 6: Calculate circadian vector
+%% 7: Calculate circadian vector
 % *uses the circstat toolbox
 n_shuffles  = 200;
 
@@ -106,7 +106,8 @@ n_shuffles  = 200;
 figure
 plot_circadian_vector(vector_length, vector_dir, my_favourite_colour);
 
-%% plot the shuffled vectors
+
+%% 8: Generate shuffled distribution, plot shuffled vectors
 
 [shuffled_vector_lengths, shuffled_vector_dirs] = get_shuffled_vectors(time_stamps, values, n_shuffles);
 
