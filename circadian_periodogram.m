@@ -1,5 +1,5 @@
 function [psd_estimate, time_periods] = circadian_periodogram(time_stamps, signal, time_res, max_period)
-% function [PSD_ESTIMATE, TARGET_FREQS] = CIRCADIAN_PERIODOGRAM(TIME_STAMPS, signal, time_res, max_period)
+% function [PSD_ESTIMATE, TARGET_FREQS] = CIRCADIAN_PERIODOGRAM(TIME_STAMPS, SIGNAL, TIME_RES, MAX_PERIOD)
 % 
 % Calculates a periodogram for timeseries SIGNAL collected at time points
 % TIME_STAMPS, for periods increasing in steps of TIME_RES up to a maximum 
