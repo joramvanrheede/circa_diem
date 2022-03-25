@@ -11,6 +11,7 @@
 % All subsequent code cells can be executed separately / in isolation and
 % only depend on the existence of the variables 'time_stamps' and 'values'.
 % 
+% (Don't forget to define your favourite colour as [R, G, B] below!)
 % 
 % 
 % Circa Diem Toolbox 2021
