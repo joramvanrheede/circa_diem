@@ -24,10 +24,7 @@ for a = 1:length(nan_inds)
         start_x     = x_vals(below_ind);
         end_x       = x_vals(above_ind);
         target_x    = x_vals(this_ind);
-        below_ind
-        above_ind
-        [start_x end_x]
-        signal([below_ind above_ind])
+
         new_signal(this_ind) = interp1([start_x end_x],signal([below_ind above_ind]),target_x);
     end
     
