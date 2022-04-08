@@ -1,8 +1,22 @@
 function [shuffled_var_explained, p_val] = get_shuffled_var_explained(time_stamps, values, time_res, n_shuffles, shuffle_mode)
-% function get_shuffled_var_explained(time_stamps, values)
+% function [shuffled_var_explained, p_val] = get_shuffled_var_explained(time_stamps, values, time_res, n_shuffles, shuffle_mode)
 % 
-% Use shuffle to see if variance explained is significant
+% Use shuffle to see if variance explained is significant.
 %
+% INPUTS:
+% 
+% TIME_STAMPS
+% 
+% VALUES: Values associated with the time stamps
+% 
+% TIME_RES: Temporal resolution of the time-of-day fit
+% 
+% N_SHUFFLES: How many shuffles to perform for getting shuffled null
+% distribution
+% 
+% SHUFFLE_MODE: 'circshift' or 'complete'. Circshift randomly shifts the
+% data for a given day with a particular offset, 'complete' performs a
+% shuffle of all values within a day for each day.
 % 
 % Circa Diem Toolbox 2021
 
@@ -16,7 +30,7 @@ if nargin < 4 || isempty(n_shuffles)
     n_shuffles = 1000;
 end
 
-% Default to complete shuffle rather than circshift
+% Default to circshift as more conservative than 
 if nargin < 5
     shuffle_mode = 'circshift';
 end
