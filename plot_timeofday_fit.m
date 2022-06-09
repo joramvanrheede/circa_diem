@@ -1,7 +1,23 @@
 function plot_timeofday_fit(time_stamps, values, time_res, colour, plot_type)
-% function PLOT_TIMEOFDAY_FIT(TIME_STAMPS, VALUES, TIME_RES, COLOUR)
+% function PLOT_TIMEOFDAY_FIT(TIME_STAMPS, VALUES, TIME_RES, COLOUR, PLOT_TYPE)
 %
-% Plot a time of day fit
+% Plot a fit across all data points aligned to time of day. 
+%
+% INPUTS:
+% 
+% TIME_STAMPS: Time points specified in matlab datetime format
+% 
+% VALUES: Values associated with the time points in TIME_STAMPS.
+% 
+% TIME_RES: The fit is determined by the means of the data in time bins
+% across the 24h diurnal cycle. 
+% 
+% COLOUR: The colour for the plot ([R G B]). Defaults to black ([0 0 0]).
+% 
+% PLOT_TYPE: 'cartesian' for Cartesian xy axes, or 'polar' for a polar
+% plot.
+%
+% 
 % 
 % Circa Diem Toolbox 2021
 
@@ -16,6 +32,7 @@ if nargin < 4
     colour  = [0 0 0];
 end
 
+% Default to cartesian 
 if nargin < 5
     plot_type = 'cartesian';
 end
