@@ -31,7 +31,7 @@ timeofday_numeric   = hours(timeofday(time_stamps));
 
 switch plot_type
     case 'cartesian'
-        scatter(timeofday(time_stamps),values,8,colour,'filled','MarkerFaceAlpha',0.5,'MarkerEdgeAlpha',0.5)
+        scatter(timeofday(time_stamps),values,8,colour,'filled','MarkerFaceAlpha',0.3,'MarkerEdgeAlpha',0.3)
         hold on
         plot(fit_times,fit_obj(hours(fit_times)),'k-','LineWidth',2)
         xlim(hours([0 24]))
