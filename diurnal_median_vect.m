@@ -16,8 +16,12 @@ end
 
 % We need the center points of the bins rather than the edges, so that each
 % value has one corresponding time point
-bin_centers     = bin_edges(2:end) - 0.5*time_res;
+bin_centers     = bin_edges(2:end) - 0.5*hours(time_res);
+
+% % Add today as dummy date to convert to datetime
+% bin_centers     = bin_centers + datetime('today');
+% 
 
 % Now use the medians across days as input to the circadian_vect function
-[vector_length, vector_dir] = circadian_vect(time_bin_medians, bin_centers);
+[vector_length, vector_dir] = circadian_vect(bin_centers(:), time_bin_medians(:));
 
