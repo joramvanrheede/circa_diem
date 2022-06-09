@@ -64,7 +64,7 @@ end
 % pre-allocate the vector lengths and vector dirs for each shuffle
 shuffled_vector_lengths  = NaN(n_shuffles, 1);
 shuffled_vector_dirs     = NaN(n_shuffles, 1);
-for a = 1:n_shuffles
+parfor a = 1:n_shuffles
     
     % Display update every 100 shuffles
     if mod(a,100) == 0
