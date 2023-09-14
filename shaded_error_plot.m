@@ -55,8 +55,11 @@ switch error_mode
         mid_trace           = data_median;
 end
 
-over_n_under_vec  	= [high_vec low_vec(end:-1:1)];
-there_n_back_vec    = [x_vals x_vals(end:-1:1)];
+high_vec    = high_vec(:);
+low_vec     = low_vec(:);
+x_vals      = x_vals(:);
+over_n_under_vec  	= [high_vec; low_vec(end:-1:1)];
+there_n_back_vec    = [x_vals; x_vals(end:-1:1)];
 
 if show_individual
     plot(x_vals, in_data','LineWidth',0.5,'Color',[0 0 0 .2])

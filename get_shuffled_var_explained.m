@@ -37,16 +37,16 @@ end
 
 % pre-allocate the vector lengths and vector dirs for each shuffle
 shuffled_var_explained     = NaN(n_shuffles, 1);
-for a = 1:n_shuffles
+parfor a = 1:n_shuffles
     
     % Display update every 100 shuffles
     if mod(a,100) == 0
         disp([num2str(a) ' shuffles complete...'])
     end
-    
+
     % Get shuffled data points
     shuffled_data_points    = within_day_shuffle(time_stamps, values, shuffle_mode);
-    
+
     % Calculate resultant vector
     shuffled_var_explained(a) = variance_explained_by_timeofday(time_stamps, shuffled_data_points, time_res);
     
